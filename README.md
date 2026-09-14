@@ -1,7 +1,5 @@
 # Controle_De_EstoqueSPRPREV
 
-# Controle-de-Estoque--PREV
-
 ## 1. Visão geral
 
 O **Controle de Estoque** é uma aplicação desenvolvida em Java para gerenciamento básico de produtos. O sistema permite cadastrar produtos, consultar o estoque, alterar informações, retirar quantidades e excluir produtos.
