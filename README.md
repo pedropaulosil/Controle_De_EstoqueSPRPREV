@@ -252,6 +252,3 @@ O sistema pode ser posteriormente expandido para incluir:
 * Controle de entrada e saída de produtos.
 
 ```
-
-**Observação importante:** também corrigi na documentação os nomes dos métodos de `retirar` e `deletar` para corresponderem ao código que você acabou de enviar: `retirarProduto()` e `deletarProduto()`.
-```
