@@ -201,12 +201,7 @@ Para executar o sistema:
 
 1. Abra o projeto em uma IDE compatível com Java.
 2. Certifique-se de que o JDK esteja configurado.
-3. Execute a classe:
-
-```text
-view.Main
-```
-
+3. Execute a classe Main:
 4. Utilize o menu exibido no terminal para realizar as operações.
 
 ---
