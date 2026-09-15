@@ -13,7 +13,6 @@ A aplicação possui interface via terminal e utiliza uma arquitetura baseada em
 ### Software
 
 * Java JDK 8 ou superior
-* IDE compatível com Java, como Eclipse, IntelliJ IDEA ou NetBeans
 
 ### Hardware
 
@@ -45,8 +44,6 @@ Responsável pelas operações e regras relacionadas ao estoque.
 
 Gerencia a lista de produtos e executa as operações de inclusão, busca, alteração, retirada e exclusão.
 
-
-
 ---
 
 ### Model
@@ -70,7 +67,7 @@ Responsável pela interação com o usuário.
 
 **`MenuEstoque.java`**
 
-Exibe o menu, recebe os dados digitados e solicita ao Controller a execução das operações.
+Exibe o menu, recebe os dados digitados, realiza validações de entrada e solicita ao Controller a execução das operações.
 
 **`Main.java`**
 
@@ -84,7 +81,9 @@ Ponto de entrada da aplicação. Responsável por iniciar a interface do sistema
 
 Cadastra um novo produto no estoque informando seu nome e quantidade.
 
-**Método:** `adicionarItem(String nome, int quantidade)`
+O nome do produto passa por uma validação para impedir o uso de números e símbolos, permitindo apenas letras e espaços.
+
+**Método:** `adicionarProdutos()`
 
 ---
 
@@ -109,13 +108,15 @@ Permite alterar o nome e a quantidade de um produto existente.
 
 O sistema procura o produto pelo nome informado e, caso ele exista, atualiza seus dados.
 
+Após realizar uma alteração, o sistema permite que o usuário escolha se deseja alterar outro item, podendo repetir a operação enquanto responder `sim`.
+
 ---
 
 ### Retirar item
 
 Reduz a quantidade disponível de um produto.
 
-**Método:** `retirarItem(String nome, int quantidade)`
+**Método:** `retirarProduto(String nome, int quantidade)`
 
 A operação não é realizada caso o produto não exista ou a quantidade solicitada seja superior à quantidade disponível.
 
@@ -125,7 +126,7 @@ A operação não é realizada caso o produto não exista ou a quantidade solici
 
 Remove completamente um produto do estoque.
 
-**Método:** `deletarItem(String nome)`
+**Método:** `deletarProduto(String nome)`
 
 ---
 
@@ -145,6 +146,8 @@ ESCOLHA A FUNCIONALIDADE QUE DESEJA ACESSAR:
 ```
 
 O usuário seleciona uma opção digitando o número correspondente.
+
+Na opção de alteração, após modificar um produto, o sistema pergunta se o usuário deseja alterar outro item.
 
 ---
 
@@ -188,7 +191,7 @@ O projeto utiliza **MVC** para separar as responsabilidades:
 * **View:** interação com o usuário (`MenuEstoque` e `Main`);
 * **Controller:** gerenciamento e regras do estoque (`ControleDeEstoque`).
 
-A interface `IControleEstoque` permite que a View trabalhe com uma abstração do Controller, reduzindo o acoplamento entre as camadas.
+A `MenuEstoque` utiliza uma instância de `ControleDeEstoque` para encaminhar as operações realizadas pelo usuário, mantendo a separação entre a interface e o gerenciamento dos dados.
 
 ---
 
@@ -215,10 +218,12 @@ O sistema utiliza valores booleanos para informar o resultado de algumas operaç
 Por exemplo:
 
 ```java
-boolean sucesso = controller.retirarItem(nome, quantidade);
+boolean sucesso = controller.retirarProduto(nome, quantidade);
 ```
 
 O retorno `true` indica que a operação foi realizada. O retorno `false` indica que a operação não pôde ser realizada, como no caso de um produto inexistente ou quantidade insuficiente.
+
+O sistema também verifica se o estoque está vazio antes de executar operações que dependem da existência de produtos.
 
 ---
 
@@ -229,6 +234,7 @@ O retorno `true` indica que a operação foi realizada. O retorno `false` indica
 * Não existe autenticação de usuários.
 * A interface é executada exclusivamente pelo terminal.
 * O sistema não possui controle de categorias, preços ou fornecedores.
+* A validação de entrada é limitada aos campos atualmente tratados pela interface.
 
 ---
 
@@ -244,3 +250,8 @@ O sistema pode ser posteriormente expandido para incluir:
 * Histórico de movimentações;
 * Relatórios de estoque;
 * Controle de entrada e saída de produtos.
+
+```
+
+**Observação importante:** também corrigi na documentação os nomes dos métodos de `retirar` e `deletar` para corresponderem ao código que você acabou de enviar: `retirarProduto()` e `deletarProduto()`.
+```
